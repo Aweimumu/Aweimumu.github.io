@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、Spring概述1.1 web项目开发中的耦合度问题 在Servlet中需要调用service中的方法，则需要在Servlet类中通过new关键字创建Service的实例 123public interface ProductService&amp;#123;    public List&lt;Product&gt; listProducts();&amp;#125;  12345public class">
+    <meta name="description" content="Spring的学习一、Spring概述1.1 web项目开发中的耦合度问题 在Servlet中需要调用service中的方法，则需要在Servlet类中通过new关键字创建Service的实例 123public interface ProductService&amp;#123;    public List&lt;Product&gt; listProducts();&amp;#125;  12345publ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/2023/05/02/Spring/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一、Spring概述1.1 web项目开发中的耦合度问题 在Servlet中需要调用service中的方法，则需要在Servlet类中通过new关键字创建Service的实例 123public interface ProductService&amp;#123;    public List&lt;Product&gt; listProducts();&amp;#125;  12345public class">
+<meta property="og:description" content="Spring的学习一、Spring概述1.1 web项目开发中的耦合度问题 在Servlet中需要调用service中的方法，则需要在Servlet类中通过new关键字创建Service的实例 123public interface ProductService&amp;#123;    public List&lt;Product&gt; listProducts();&amp;#125;  12345publ">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/imgs/1616724645995.png">
 <meta property="og:image" content="http://example.com/imgs/1616728103181.png">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/imgs/1617008695615.png">
 <meta property="og:image" content="http://example.com/imgs/1617093621853.png">
 <meta property="article:published_time" content="2023-05-01T16:15:02.545Z">
-<meta property="article:modified_time" content="2023-05-01T16:15:25.550Z">
+<meta property="article:modified_time" content="2023-05-01T16:25:19.068Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/imgs/1616724645995.png">
@@ -239,7 +239,7 @@
         
         
         
-          291 mins
+          292 mins
         
       </span>
     
@@ -282,7 +282,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="一、Spring概述"><a href="#一、Spring概述" class="headerlink" title="一、Spring概述"></a>一、Spring概述</h2><h4 id="1-1-web项目开发中的耦合度问题"><a href="#1-1-web项目开发中的耦合度问题" class="headerlink" title="1.1 web项目开发中的耦合度问题"></a>1.1 web项目开发中的耦合度问题</h4><ul>
+                <h1 id="Spring的学习"><a href="#Spring的学习" class="headerlink" title="Spring的学习"></a>Spring的学习</h1><h2 id="一、Spring概述"><a href="#一、Spring概述" class="headerlink" title="一、Spring概述"></a>一、Spring概述</h2><h4 id="1-1-web项目开发中的耦合度问题"><a href="#1-1-web项目开发中的耦合度问题" class="headerlink" title="1.1 web项目开发中的耦合度问题"></a>1.1 web项目开发中的耦合度问题</h4><ul>
 <li><p>在Servlet中需要调用service中的方法，则需要在Servlet类中通过new关键字创建Service的实例</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ProductService</span>&#123;<br>    <span class="hljs-keyword">public</span> List&lt;Product&gt; <span class="hljs-title function_">listProducts</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
