@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="SpringBoot的源码学习篇缓存的源码解析 SpringBoot的默认的缓存类型是什么 ​	在没有任何配置的情况下 默认的缓存时simple类型  源码中使用那个配置类，该配置类创建了那些对象   创建了ConcurrentMapCacheManager对象 同时也创建了ConcurrentMaptCache对象  缓存对象的类型是什么 ConcurrentMap  缓存的执行流程是什么 怎么">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/imgs/image-20230503151733980.png">
+<meta property="og:image" content="http://example.com/imgs/20230503151733980.png">
 <meta property="og:image" content="http://example.com/imgs/image-20230503152132012.png">
 <meta property="og:image" content="http://example.com/imgs/image-20230503152413223.png">
 <meta property="article:published_time" content="2023-05-01T16:19:32.501Z">
-<meta property="article:modified_time" content="2023-05-03T07:45:10.700Z">
+<meta property="article:modified_time" content="2023-05-03T09:33:46.254Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/imgs/image-20230503151733980.png">
+<meta name="twitter:image" content="http://example.com/imgs/20230503151733980.png">
   
   
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          714 字
+          3.1k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          6 分钟
+          26 分钟
         
       </span>
     
@@ -293,7 +293,7 @@
 <h4 id="Redis组件缓存源码分析"><a href="#Redis组件缓存源码分析" class="headerlink" title="Redis组件缓存源码分析"></a>Redis组件缓存源码分析</h4><ol>
 <li><p>在哪里加载的配置对象RedisCacheConfiguration</p>
 <p>最初是加载cacheAutoConfiguration 然后进入selectImports方法加载出九个缓存 通过层层筛选找到RedisCacheConfiguration</p>
-<p><img src="/../imgs/image-20230503151733980.png" srcset="/img/loading.gif" lazyload alt="image-20230503151733980"></p>
+<p><img src="/../imgs/20230503151733980.png" srcset="/img/loading.gif" lazyload alt="20230503151733980"></p>
 </li>
 <li><p>加载的流程是什么</p>
 <p>​	加载流程是从上到下以此加载这九个缓存看是否这几天类中是否满足条件满足条件（在类上是否有注解 @COnditionalOnMissingBean(CacheManager.class)&amp;@Condtional(CaCondtion.clss)） 如果满足条件则就加载这个缓存</p>
@@ -306,6 +306,19 @@
 <p>​	就是通过CacheManager这个对象中的 put方法 和lookup方法来做缓存 通过put方法来放入 lookup方法来查询</p>
 </li>
 </ol>
+<hr>
+<h2 id="SpringBoot的运行与部署"><a href="#SpringBoot的运行与部署" class="headerlink" title="SpringBoot的运行与部署"></a>SpringBoot的运行与部署</h2><h2 id="Spring的运维部署方式"><a href="#Spring的运维部署方式" class="headerlink" title="Spring的运维部署方式"></a>Spring的运维部署方式</h2><p>使用jar方式部署 使用jar的方式部署导入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span><br>           <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>           <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>           <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.6.13<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>           <span class="hljs-tag">&lt;<span class="hljs-name">executions</span>&gt;</span><br>               <span class="hljs-tag">&lt;<span class="hljs-name">execution</span>&gt;</span><br>                   <span class="hljs-tag">&lt;<span class="hljs-name">goals</span>&gt;</span><br>                       <span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>repackage<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span><br>                   <span class="hljs-tag">&lt;/<span class="hljs-name">goals</span>&gt;</span><br>               <span class="hljs-tag">&lt;/<span class="hljs-name">execution</span>&gt;</span><br>           <span class="hljs-tag">&lt;/<span class="hljs-name">executions</span>&gt;</span><br>       <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>打开文件所有在目录 执行java -jar 包名</p>
+<p>使用war的方式打包部署项目</p>
+<p>1.导入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-site-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.7.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span><br><br>###packaging转换为war<br><span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>war<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span><br>导入相关依赖 servlet 和web 并且排除自带的tomcat<br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.servlet<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>javax.servlet-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">exclusions</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>                <span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">exclusions</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>2.将启动类指向main类 在此之前切记要做mian方法中间webapp&#x2F;WEB-INF&#x2F;web.xml的配置文件不然package不起</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.awei;<br><br><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;<br><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;<br><span class="hljs-keyword">import</span> org.springframework.boot.builder.SpringApplicationBuilder;<br><span class="hljs-keyword">import</span> org.springframework.boot.web.servlet.support.SpringBootServletInitializer;<br><br><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestDemoApplication</span>  <span class="hljs-keyword">extends</span> <span class="hljs-title class_">SpringBootServletInitializer</span><br>&#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        SpringApplication.run(TestDemoApplication.class, args);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> SpringApplicationBuilder <span class="hljs-title function_">configure</span><span class="hljs-params">(SpringApplicationBuilder builder)</span> &#123;<br>        <span class="hljs-comment">//该方法的返回值指向main方法启动类</span><br>        <span class="hljs-keyword">return</span> builder.sources(TestDemoApplication.class);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>然后打包的项目移动直tomcat安装路径的webapp下 启动tomcat 访问localhost:8080&#x2F;包名&#x2F;访问的类</p>
 </li>
 </ol>
 
